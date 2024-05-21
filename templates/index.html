@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Cookies Viewer</title>
+    <script>
+        function loadSecureCookies() {
+            let url = document.getElementById('urlInput').value;
+            fetch('/get_secure_cookies', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ url: url })
+            })
+            .then(response => response.json())
+            .then(data => {
+                let cookiesList = document.getElementById('cookiesList');
+                cookiesList.innerHTML = '';
+                data.forEach(cookie => {
+                    let listItem = document.createElement('li');
+                    listItem.textContent = `${cookie.name}=${cookie.value}`;
+                    cookiesList.appendChild(listItem);
+                });
+            })
+            .catch(error => console.error('Error loading secure cookies:', error));
+        }
+    </script>
+</head>
+<body>
+    <h1>Welcome to Secure Cookies Viewer</h1>
+    <input type="text" id="urlInput" placeholder="Enter URL to scan" size="50">
+    <button onclick="loadSecureCookies()">Show Secure Cookies</button>
+    <ul id="cookiesList"></ul>
+</body>
+</html>
