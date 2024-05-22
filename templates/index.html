@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Cookies Viewer</title>
+    <title>Cookies Viewer</title>
     <link rel="stylesheet" href="/static/styles.css">
     <script>
-        function loadSecureCookies() {
+        function loadCookies() {
             let url = document.getElementById('urlInput').value;
-            fetch('/get_secure_cookies', {
+            fetch('/get_cookies', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -21,19 +21,18 @@
                 cookiesList.innerHTML = '';
                 data.forEach(cookie => {
                     let listItem = document.createElement('li');
-                    listItem.textContent = `${cookie.name}=${cookie.value}`;
+                    listItem.textContent = `${cookie.name}=${cookie.value} (Secure: ${cookie.secure})`;
                     cookiesList.appendChild(listItem);
                 });
             })
-            .catch(error => console.error('Error loading secure cookies:', error));
+            .catch(error => console.error('Error loading cookies:', error));
         }
     </script>
 </head>
 <body>
-    
-    <h1>Welcome to Secure Cookies Viewer</h1>
+    <h1>Welcome to Cookies Viewer</h1>
     <input type="text" id="urlInput" placeholder="Enter URL to scan" size="50">
-    <button onclick="loadSecureCookies()">Show Secure Cookies</button>
+    <button onclick="loadCookies()">Show Cookies</button>
     <ul id="cookiesList"></ul>
 </body>
 </html>

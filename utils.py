@@ -1,16 +1,19 @@
 import requests
 
-def scan_secure_cookies(url):
+def scan_all_cookies(url):
     try:
         response = requests.get(url, verify=True)
         cookies = response.cookies
 
-        secure_cookies = []
+        all_cookies = []
         for cookie in cookies:
-            if cookie.secure:
-                secure_cookies.append({'name': cookie.name, 'value': cookie.value})
+            all_cookies.append({
+                'name': cookie.name,
+                'value': cookie.value,
+                'secure': cookie.secure
+            })
 
-        return secure_cookies
+        return all_cookies
 
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")

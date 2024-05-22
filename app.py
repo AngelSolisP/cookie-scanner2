@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify, render_template
-from utils import scan_secure_cookies
-import logging
+from utils import scan_all_cookies
 
 app = Flask(__name__)
 
@@ -8,12 +7,12 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route('/get_secure_cookies', methods=['POST'])
-def get_secure_cookies():
+@app.route('/get_cookies', methods=['POST'])
+def get_all_cookies():
     data = request.get_json()
     url = data.get('url')
     if url:
-        cookies = scan_secure_cookies(url)
+        cookies = scan_all_cookies(url)
         return jsonify(cookies)
     else:
         return jsonify([])
