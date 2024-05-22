@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 from utils import scan_secure_cookies
+import logging
 
 app = Flask(__name__)
 
