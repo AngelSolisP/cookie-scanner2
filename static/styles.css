@@ -8,6 +8,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: skyblue;
 }
 
 h1 {
@@ -25,7 +26,7 @@ input[type="text"] {
 }
 
 button {
-    background-color: #e8491d;
+    background-color: blue;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -63,3 +64,4 @@ li {
         width: 80%;
     }
 }
+
